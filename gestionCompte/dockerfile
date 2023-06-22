@@ -1,4 +1,4 @@
 FROM openjdk:11
-EXPOSE 8082
+EXPOSE 8081
 ADD /target/gestionCompte-0.0.1-SNAPSHOT.jar gestionCompte.jar
 ENTRYPOINT [ "java","-jar", "gestionCompte.jar"]

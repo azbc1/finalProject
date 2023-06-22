@@ -1,0 +1,56 @@
+version: "3.9"
+
+services:
+ eurekaserver:
+   build: discovery-service
+   container_name: eurekaserver
+   image: eurekaserver
+   networks:
+      - eureka-server
+   ports:
+    - "8761:8761"
+
+ microservice-gestion-compte:
+   build: gestionCompte
+  #  network_mode: host 
+   image: msgestioncompte
+   ports:
+   - "8081:8081"
+   networks:
+      - eureka-server
+   environment:
+    - eureka.client.serviceUrl.defaultZone=http://eurekaserver:8761/eureka
+   depends_on:
+     - eurekaserver
+
+ microservice-gestion-user:
+   build: user-service
+  #  network_mode: host 
+   image: msgestionusers
+   ports:
+   - "8082:8082"
+   networks:
+      - eureka-server
+   environment:
+    - eureka.client.serviceUrl.defaultZone=http://eurekaserver:8761/eureka
+   depends_on:
+     - eurekaserver
+
+ microservice-getway:
+   build: gateway-service
+  #  network_mode: host 
+   image: msgetway
+   ports:
+   - "8762:8762"
+   networks:
+      - eureka-server
+   environment:
+    - eureka.client.serviceUrl.defaultZone=http://eurekaserver:8761/eureka
+   depends_on:
+     - eurekaserver     
+
+
+networks:
+  eureka-server:
+    name: eureka-server
+    driver: bridge
