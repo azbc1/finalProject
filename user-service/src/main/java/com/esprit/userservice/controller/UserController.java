@@ -24,6 +24,7 @@ import com.esprit.userservice.service.UserService;
  *
  */
 @RestController
+@RequestMapping(value = "api/users")
 public class UserController {
 
 	@Autowired

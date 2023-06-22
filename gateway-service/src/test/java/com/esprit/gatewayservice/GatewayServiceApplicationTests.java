@@ -1,4 +1,4 @@
-package com.sayedbaladoh.gatewayservice;
+package com.esprit.gatewayservice;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
