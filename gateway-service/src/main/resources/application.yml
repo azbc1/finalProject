@@ -4,6 +4,8 @@ server:
 spring:
   application:
     name: gateway-service
+  main:
+    web-application-type: reactive
   cloud:
     gateway:
       globalcors:
@@ -29,6 +31,10 @@ spring:
           uri: lb://credit-service
           predicates:
             - Path=/api/creditrequests/**
+        - id: gestionCompte
+          uri: lb://compte-service
+          predicates:
+            - Path=/API/GestionCompte/**
         
 eureka:
   instance:
