@@ -77,22 +77,22 @@ services:
     build: currency-service
     depends_on:
       - eurekaserver
-      - postgresql
       - fluent-bit
     container_name: currency-service
     privileged: true
+    environment:
+      - eureka.client.serviceUrl.defaultZone=http://eurekaserver:8761/eureka
     volumes:
       - my_volume:/app
     ports:
       - "8989:8989"
     networks:
-      - app
       - eureka-server
-    # logging:
-    #   driver: fluentd
-    #   options:
-    #     fluentd-address: localhost:24225
-    #     tag: currency-service
+    logging:
+      driver: fluentd
+      options:
+        fluentd-address: localhost:24225
+        tag: currency-service
 #fluentbit service      
   fluent-bit:
     image: grafana/fluent-bit-plugin-loki:latest
@@ -108,31 +108,8 @@ services:
       - "24225:24224/udp"
     networks:
       - loki
-  postgresql:
-    container_name: postgresql
-    image: postgres:14-alpine
-    volumes:
-      - my_volume:/var/lib/database
-      - "./scripts:/docker-entrypoint-initdb.d/"
-    restart: always
-    environment:
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: root
-      POSTGRES_DB: currency
-    ports:
-      - "5432:5432"
-    networks:
-      - app
-    command: --max_prepared_transactions=110
-    logging:
-      driver: fluentd
-      options:
-        fluentd-address: localhost:24225
-        tag: postgresql
 networks:
   loki:
-    external: true
-  app:
     external: true
   eureka-server:
     driver: bridge
