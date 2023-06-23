@@ -1,5 +1,5 @@
 server:
-  port: 8054
+  port: 8762
 
 spring:
   application:
@@ -34,7 +34,7 @@ spring:
         - id: gestionCompte
           uri: lb://compte-service
           predicates:
-            - Path=/API/GestionCompte/**
+            - Path=/api/GestionCompte/**
         
 eureka:
   instance:

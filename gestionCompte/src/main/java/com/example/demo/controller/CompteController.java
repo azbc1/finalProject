@@ -12,7 +12,7 @@ import com.example.demo.entity.Compte;
 import com.example.demo.service.ICompteService;
 
 @RestController
-@RequestMapping(value = "API/GestionCompte")
+@RequestMapping(value = "api/GestionCompte")
 public class CompteController {
 
 	@Autowired
