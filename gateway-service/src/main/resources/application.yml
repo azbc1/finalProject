@@ -1,29 +1,38 @@
 server:
-  port: 8080
+  port: 8054
 
 spring:
   application:
     name: gateway-service
-
-zuul:
-  prefix: /api
-  routes:
-    user:
-      path: /users/**
-      serviceId: user-service
-    site:
-      path: /sites/**
-      serviceId: site-service
-    organization:
-      path: /organizations/**
-      serviceId: organization-service
-
-ribbon:
-  eureka:
-    enabled: true
-
+  cloud:
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowed-origins: "*"
+            allowed-methods: "*"
+            allowed-headers: "*"
+      routes:
+        - id: credit
+          uri: lb://credit-service
+          predicates:
+            - Path=/api/simulator/**
+        - id: user
+          uri: lb://user-service
+          predicates:
+            - Path=/users/**
+        - id: rendezVous
+          uri: lb://rendezVous-service
+          predicates:
+            - Path=/api/GestionRendezVous/**
+        - id: requestCredit
+          uri: lb://credit-service
+          predicates:
+            - Path=/api/creditrequests/**
+        
 eureka:
+  instance:
+    appname: ${spring.application.name}
   client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
-    registerWithEureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka  
