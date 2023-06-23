@@ -22,7 +22,7 @@ spring:
         - id: user
           uri: lb://user-service
           predicates:
-            - Path=/users/**
+            - Path=/api/users/**
         - id: rendezVous
           uri: lb://rendezVous-service
           predicates:
@@ -35,6 +35,10 @@ spring:
           uri: lb://compte-service
           predicates:
             - Path=/api/GestionCompte/**
+        - id: currency-service
+          uri: lb://currency-service
+          predicates:
+            - Path=/api/converter/**
         
 eureka:
   instance:
