@@ -1,9 +1,9 @@
-package com.esprit.rendezVousService.repository;
+package com.esprit.rendezVous.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.esprit.rendezVousService.model.RendezVous;
+import com.esprit.rendezVous.model.RendezVous;
 
 
 

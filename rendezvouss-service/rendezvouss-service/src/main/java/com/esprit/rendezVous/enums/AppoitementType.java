@@ -1,4 +1,4 @@
-package com.esprit.enums;
+package com.esprit.rendezVous.enums;
 
 public enum AppoitementType {
 
