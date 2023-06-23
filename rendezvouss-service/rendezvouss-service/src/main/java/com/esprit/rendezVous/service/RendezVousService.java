@@ -1,11 +1,12 @@
-package com.esprit.rendezVousService.service;
+package com.esprit.rendezVous.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import com.esprit.rendezVousService.model.RendezVous;
-import com.esprit.rendezVousService.repository.RendezVousRepository;
+import com.esprit.rendezVous.model.RendezVous;
+import com.esprit.rendezVous.repository.RendezVousRepository;
 
 /**
  * User Service
@@ -14,6 +15,7 @@ import com.esprit.rendezVousService.repository.RendezVousRepository;
  *
  */
 
+@Service
 public class RendezVousService implements IRendezVousService {
 
 	@Autowired
@@ -27,6 +29,11 @@ public class RendezVousService implements IRendezVousService {
 	@Override
 	public RendezVous getRendezVous(Long id) {
 		return rp.findById(id).get();
+	}
+
+	@Override
+	public RendezVous ajouterRendezVous(RendezVous rendezVous) {
+		 return rp.save(rendezVous);
 	}
 
 }
