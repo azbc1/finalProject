@@ -48,7 +48,41 @@ services:
     environment:
       - eureka.client.serviceUrl.defaultZone=http://eurekaserver:8761/eureka
     depends_on:
-      - eurekaserver       
+      - eurekaserver  
+
+  postgres-14.3:
+    image: "postgres:14.3-alpine"
+    container_name: "postgres14ms"
+    environment:
+      LANG: C.UTF-8
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Postgres+123
+      POSTGRES_DB: cartecredit
+    ports:
+      - "5432:5432"
+    volumes:
+      - "./scripts:/docker-entrypoint-initdb.d/"
+    command: ["--max_prepared_transactions=180", "--max_connections=500"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      retries: 10
+    networks:
+      - eureka-server
+
+  carte-bancaire-ms:
+    build: CarteBancaireMicroservice
+    container_name: CarteBancaireMicroservice
+  #  network_mode: host 
+    image: carteabncairemicroservice
+    ports:
+      - "5000:5000"
+    networks:
+      - eureka-server
+    environment:
+      - eureka.client.serviceUrl.defaultZone=http://eurekaserver:8761/eureka
+    depends_on:
+      - eurekaserver 
 
 networks:
   eureka-server:

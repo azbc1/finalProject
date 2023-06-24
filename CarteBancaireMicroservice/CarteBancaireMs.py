@@ -9,7 +9,7 @@ CORS(app)
 
 # Database connection parameters
 db_params = {
-    'host': '172.27.0.2',
+    'host': 'postgres14ms',
     'port': 5432,
     'database': 'cartecredit',
     'user': 'postgres',
@@ -33,13 +33,11 @@ cursor.execute(create_table_query)
 conn.commit()
 
 # Configure Eureka client
-eureka_client.init(
-    eureka_server="http://localhost:8761/eureka/",
-    app_name="MyApplication",
-    instance_host="127.0.0.2",
+eureka_client.init_registry_client(
+    eureka_server="http://eurekaserver:8761/eureka",
+    app_name="MyApplicativon",
     instance_port=5000,
-    zone="default",
-    prefer_same_zone=True
+    ip_address=eurekaserver,
 )
 
 @app.route('/cards', methods=['GET'])
