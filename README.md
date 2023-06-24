@@ -33,5 +33,8 @@ Pour la getions des Rendez-vous
 **- Les services :**
 ## Service 6: Microservice Echange monnaie
 **- Nom de l'application :** 
+currency-service
 **- Les services :**
+/api/converter qui accepte 3 parametres a savoir : currentCurrency , targetCurrency,amount
+
 
