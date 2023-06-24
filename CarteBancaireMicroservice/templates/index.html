@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Card List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        form {
+            max-width: 400px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+
+        button[type="submit"] {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Card List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Card Number</th>
+                <th>Card Holder</th>
+                <th>Expiry Date</th>
+            </tr>
+        </thead>
+        <tbody id="card-list"></tbody>
+    </table>
+
+    <h2>Add Card</h2>
+    <form id="add-card-form">
+        <label for="card-number">Card Number:</label>
+        <input type="text" id="card-number" name="card-number" required>
+
+        <label for="card-holder">Card Holder:</label>
+        <input type="text" id="card-holder" name="card-holder" required>
+
+        <label for="expiry-date">Expiry Date:</label>
+        <input type="text" id="expiry-date" name="expiry-date" required>
+
+        <button type="submit">Add Card</button>
+    </form>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Fetch and display the card list
+            fetch('http://127.0.0.2:5000/api/python/cards')
+                .then(response => response.json())
+                .then(data => {
+                    const cardList = document.getElementById('card-list');
+                    data.forEach(card => {
+                        const row = cardList.insertRow();
+                        const cardNumberCell = row.insertCell();
+                        const cardHolderCell = row.insertCell();
+                        const expiryDateCell = row.insertCell();
+
+                        cardNumberCell.textContent = card[1];
+                        cardHolderCell.textContent = card[2];
+                        expiryDateCell.textContent = card[3];
+                    });
+                });
+
+            // Handle form submission to add a new card
+            const addCardForm = document.getElementById('add-card-form');
+            addCardForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const cardNumberInput = document.getElementById('card-number');
+                const cardHolderInput = document.getElementById('card-holder');
+                const expiryDateInput = document.getElementById('expiry-date');
+
+                const card = {
+                    card_number: cardNumberInput.value,
+                    card_holder: cardHolderInput.value,
+                    expiry_date: expiryDateInput.value
+                };
+
+                fetch('http://127.0.0.2:5000/api/python/create', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(card)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                    addCardForm.reset();
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
