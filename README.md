@@ -43,7 +43,18 @@ http://127.0.0.2:5000/api/python/create Post : la ceration du carte credit
  docker-compose up --build -d 
  ![image](https://github.com/azbc1/finalProject/assets/86234200/cbfd46b1-e61b-4366-8369-ef587368dd60)
 
+## Service 5: Microservice  Credit
+**- Nom de l'application :** credit-service
+**- Les services :** simulateur /http://localhost:8054/api/simulator/carSimulator?loanAmount=65&months=60
+creation demande credit  http://localhost:8054/api/creditrequests/10
+affichage demande credit http://localhost:8085/api/creditrequests/2
+front Simulateur : 
+http://localhost:4200/
+![image](https://github.com/azbc1/finalProject/assets/86858336/06a43d5d-24a7-4d9a-950d-af3827b06d47)
+
 ## Service 6: Microservice Echange monnaie
 **- Nom de l'application :** 
 **- Les services :**
+## Echange entre micro service
+Nous avons connecté les deux microservices "Utilisateur" et "Crédit". Lorsque le service de demande de crédit reçoit une demande, il vérifie d'abord si l'utilisateur existe en appelant le microservice "Utilisateur" via le service d'ajout d'utilisateurs. Si l'utilisateur n'existe pas, le service d'ajout d'utilisateurs créera un nouvel utilisateur. Dans le cas où l'utilisateur existe déjà, le service de demande de crédit procède directement à la demande de crédit.
 
