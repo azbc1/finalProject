@@ -15,7 +15,8 @@ leurs dépendances et les liens entre eux, simplifiant ainsi le déploiement de 
 
 ## Euroka 
 Nous avons intégré le backend de tous nos microservices en utilisant Eureka. Eureka est utilisé comme service de découverte et d'enregistrement des instances de nos microservices, permettant ainsi une communication efficace entre eux
-![image](https://github.com/azbc1/finalProject/assets/86234200/6f5f339e-0a62-437e-9f74-6ebec548ffc8)
+![image](https://github.com/azbc1/finalProject/assets/86234200/347dd5ec-3fc5-468b-9060-14f245e28a25)
+
 
 ## Service 1: Microservice User  
 Pour la getions des utilisateur 
