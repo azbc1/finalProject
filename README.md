@@ -35,6 +35,7 @@ Pour la getions des Rendez-vous
 **- Nom de l'application :** 
 currency-service
 **- Les services :**
-/api/converter qui accepte 3 parametres a savoir : currentCurrency , targetCurrency,amount
+/api/converter qui accepte 3 parametres a savoir : &nbsp;
+currentCurrency , targetCurrency,amount
 
 
