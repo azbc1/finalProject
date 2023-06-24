@@ -13,6 +13,9 @@ leurs dépendances et les liens entre eux, simplifiant ainsi le déploiement de 
 ## Architecture 
 ![image](https://github.com/azbc1/finalProject/assets/86234200/3fea3e8a-2d38-4630-9ae6-2426553a82a1)
 
+## Euroka 
+Nous avons intégré le backend de tous nos microservices en utilisant Eureka. Eureka est utilisé comme service de découverte et d'enregistrement des instances de nos microservices, permettant ainsi une communication efficace entre eux
+![image](https://github.com/azbc1/finalProject/assets/86234200/6f5f339e-0a62-437e-9f74-6ebec548ffc8)
 
 ## Service 1: Microservice User  
 Pour la getions des utilisateur 
@@ -44,6 +47,7 @@ http://127.0.0.2:5000/api/python/create Post : la ceration du carte credit
 
  d'aller vers le projet CarteBancaireMicroservice et lancer le docker-compose: 
  docker-compose up --build -d 
+ 
  ![image](https://github.com/azbc1/finalProject/assets/86234200/cbfd46b1-e61b-4366-8369-ef587368dd60)
 
 ## Service 5: Microservice  Credit
