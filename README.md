@@ -34,7 +34,15 @@ Pour la getions des Rendez-vous
 **- Les services :**
 ## Service 5: Microservice Carte Credit
 **- Nom de l'application :** 
-**- Les services :**
+**- Les services : 
+http://127.0.0.2:5000/api/python/front   : la partie front 
+http://127.0.0.2:5000/api/python/cads : le select/all
+http://127.0.0.2:5000/api/python/create Post : la ceration du carte credit 
+
+ d'aller vers le projet CarteBancaireMicroservice et lancer le docker-compose: 
+ docker-compose up --build -d 
+ ![image](https://github.com/azbc1/finalProject/assets/86234200/cbfd46b1-e61b-4366-8369-ef587368dd60)
+
 ## Service 6: Microservice Echange monnaie
 **- Nom de l'application :** 
 **- Les services :**
