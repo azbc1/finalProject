@@ -18,7 +18,10 @@ leurs dépendances et les liens entre eux, simplifiant ainsi le déploiement de 
 Pour la getions des utilisateur 
 **- Nom de l'application :** user-service
 **- Les services :**
-  
+getAllUsers : /api/users GET 
+getUserBySiteId : /api/site/{siteID} GET
+getUserByOrganisationId : /api/site/{organisationId} GET
+addUser :  /api/users POST
 ## Service 2: Microservice Rendez-vous
 Pour la getions des Rendez-vous 
 **- Nom de l'application :** rendezvouss-service
