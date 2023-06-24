@@ -2,13 +2,14 @@ package com.esprit.credit.service;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.esprit.credit.entity.Credit;
 import com.esprit.credit.entity.CreditRequest;
 import com.esprit.credit.entity.Insurance;
+import com.esprit.credit.entity.User;
 import com.esprit.credit.enumeration.CreditRequestStatus;
 import com.esprit.credit.enumeration.CreditStatus;
 import com.esprit.credit.enumeration.CreditType;
@@ -18,9 +19,11 @@ import com.esprit.credit.repository.InsuranceRepository;
 import com.esprit.credit.util.Constants;
 import com.esprit.credit.util.SystemMessages;
 
+import java.nio.charset.Charset;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.NoSuchElementException;
+import java.util.Random;
 import java.util.Set;
 @Service
 public class CreditRequestService {
@@ -41,16 +44,34 @@ public class CreditRequestService {
 	    private AccountService accountService;*/
 //add
 
-	    public CreditRequest addCreditRequest(CreditRequest creditRequest, Integer id) throws Exception {
-	      RestTemplate resteTemplate= new RestTemplate();
+	    @SuppressWarnings("finally")
+		public CreditRequest addCreditRequest(CreditRequest creditRequest, Integer id) throws Exception {
+			//cominucation entre user et credit
+	    	RestTemplate restTemplate = new RestTemplate();
+			User user = null;
+			try {
+				user = restTemplate.getForObject("http://localhost:8054/api/users/" + id, User.class);
+			} finally {
+				if (user == null) {
+					user = new User(userData(),userData(),userData(),userData());
+					restTemplate.postForEntity("http://localhost:8054/api/users", user, String.class);
+				}
+				creditRequest.setCreditRequestStatus(CreditRequestStatus.CREATED);
+
+				// add insurance
+				insuranceRepository.save(creditRequest.getInsurance());
+				return creditRequestRepository.save(creditRequest);
+			}
+		}
+	    
+	    public static String userData () {
+	    	byte[] array=new byte[10];
+	    	new Random().nextBytes(array);
+			return new String(array,Charset.forName("UTF-8"));
 	    	
 	    	
 	    	
-	        creditRequest.setCreditRequestStatus(CreditRequestStatus.CREATED);
-	       
-	        //add insurance
-	       insuranceRepository.save(creditRequest.getInsurance());	        
-	        return creditRequestRepository.save(creditRequest);
+	    	
 	    }
 //delete
 	    public String deleteCreditRequest(Integer id) throws Exception {
