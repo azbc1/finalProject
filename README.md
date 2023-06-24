@@ -10,6 +10,10 @@ Dans notre application, nous avons **dockerisé l'ensemble de nos services** .
 Tous les conteneurs nécessaires sont spécifiés et regroupés dans le fichier docker-compose.
 Cette approche nous permet de gérer facilement et de déployer l'ensemble de notre application en utilisant Docker. Grâce au fichier docker-compose, nous pouvons définir les différentes configurations des conteneurs,
 leurs dépendances et les liens entre eux, simplifiant ainsi le déploiement de notre application.
+## Architecture 
+![image](https://github.com/azbc1/finalProject/assets/86234200/3fea3e8a-2d38-4630-9ae6-2426553a82a1)
+
+
 ## Service 1: Microservice User  
 Pour la getions des utilisateur 
 **- Nom de l'application :** user-service
